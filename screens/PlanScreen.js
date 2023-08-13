@@ -17,6 +17,75 @@ const PlanScreen = () => {
     const data = plans
     const [selected, setSelected] = useState([]);
     const [price, setPrice] = useState();
+
+    const subscribe = async() => {
+        try{
+            console.warn("hello")
+            const response = await fetch("http://localhost:8080/payment", {
+                method: "POST",
+                body: JSON.stringify({
+                  amount:Math.floor(price * 100),
+          
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              console.warn("by")
+              const data = await response.json();
+              console.log(data);
+              if (!response.ok) return Alert.alert(data.message);
+              const clientSecret = data.clientSecret;
+              const initSheet = await stripe.initPaymentSheet({
+                paymentIntentClientSecret: clientSecret,
+              });
+              if (initSheet.error) return Alert.alert(initSheet.error.message);
+              const presentSheet = await stripe.presentPaymentSheet({
+                clientSecret,
+              });
+              if (presentSheet.error) return Alert.alert(presentSheet.error.message);
+          
+              // else{
+              //   createUserWithEmailAndPassword(auth,email,password).then((userCredentials) => {
+              //     console.log(userCredentials);
+              //     const user = userCredentials.user;
+              //     console.log(user.email);
+              //   })
+              // }
+        }catch(err){
+            console.warn(err.message)
+        }
+        // const response = await fetch("http://localhost:8080/payment", {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     amount:Math.floor(price * 100),
+    
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // const data = await response.json();
+        // console.log(data);
+        // if (!response.ok) return Alert.alert(data.message);
+        // const clientSecret = data.clientSecret;
+        // const initSheet = await stripe.initPaymentSheet({
+        //   paymentIntentClientSecret: clientSecret,
+        // });
+        // if (initSheet.error) return Alert.alert(initSheet.error.message);
+        // const presentSheet = await stripe.presentPaymentSheet({
+        //   clientSecret,
+        // });
+        // if (presentSheet.error) return Alert.alert(presentSheet.error.message);
+    
+        // else{
+        //   createUserWithEmailAndPassword(auth,email,password).then((userCredentials) => {
+        //     console.log(userCredentials);
+        //     const user = userCredentials.user;
+        //     console.log(user.email);
+        //   })
+        // }
+      }
     return (
         <>
             <ScrollView style={{ marginTop: 50 }}>
@@ -190,7 +259,7 @@ const PlanScreen = () => {
                         <Text style={{ color: "white", fontSize: 17, fontWeight: "600" }}>Selected Plan {selected}</Text>
                     </View>
 
-                    <Pressable>
+                    <Pressable onPress={subscribe}>
                         <Text style={{ fontSize: 17, fontWeight: "bold", color: "white" }}>PAY ₹{price}</Text>
                     </Pressable>
                 </Pressable>

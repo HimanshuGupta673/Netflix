@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@react-navigation/native-stack": "^6.9.13",
+    "@stripe/stripe-react-native": "^0.30.0",
+    "axios": "^1.4.0",
     "expo": "~49.0.7",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
