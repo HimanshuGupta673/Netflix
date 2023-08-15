@@ -5,7 +5,7 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 export default function App() {
   return (
     <>
-     <StripeProvider publishableKey="pk_test_51MW0TFSE0J6Dbm0k8AUFjM4ZFoy7LpaaoesCTuksoNFTBNRBNQd2Z9A7dbirgPjnMND9MBlTtZu07zVA9OPeQqUC00k92fzJP2">
+     <StripeProvider publishableKey="pk_test_51NeZx7SEM8ReiHhLiGNRi4kmmjNu2ogn5bONGb22SvnqNuuLIanQLrkWCQjt6cI31YZ1THg50moC9s6nwcaUXnG400KqvEvt3l">
           <StackNavigator />
           <StatusBar style="light" />
       </StripeProvider>

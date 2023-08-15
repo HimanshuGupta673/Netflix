@@ -18,74 +18,53 @@ const PlanScreen = () => {
     const [selected, setSelected] = useState([]);
     const [price, setPrice] = useState();
 
-    const subscribe = async() => {
-        try{
-            console.warn("hello")
-            const response = await fetch("http://localhost:8080/payment", {
-                method: "POST",
-                body: JSON.stringify({
-                  amount:Math.floor(price * 100),
-          
-                }),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-              console.warn("by")
-              const data = await response.json();
-              console.log(data);
-              if (!response.ok) return Alert.alert(data.message);
-              const clientSecret = data.clientSecret;
-              const initSheet = await stripe.initPaymentSheet({
-                paymentIntentClientSecret: clientSecret,
-              });
-              if (initSheet.error) return Alert.alert(initSheet.error.message);
-              const presentSheet = await stripe.presentPaymentSheet({
-                clientSecret,
-              });
-              if (presentSheet.error) return Alert.alert(presentSheet.error.message);
-          
-              // else{
-              //   createUserWithEmailAndPassword(auth,email,password).then((userCredentials) => {
-              //     console.log(userCredentials);
-              //     const user = userCredentials.user;
-              //     console.log(user.email);
-              //   })
-              // }
-        }catch(err){
-            console.warn(err.message)
-        }
-        // const response = await fetch("http://localhost:8080/payment", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     amount:Math.floor(price * 100),
-    
-        //   }),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // const data = await response.json();
-        // console.log(data);
-        // if (!response.ok) return Alert.alert(data.message);
-        // const clientSecret = data.clientSecret;
-        // const initSheet = await stripe.initPaymentSheet({
-        //   paymentIntentClientSecret: clientSecret,
-        // });
-        // if (initSheet.error) return Alert.alert(initSheet.error.message);
-        // const presentSheet = await stripe.presentPaymentSheet({
-        //   clientSecret,
-        // });
-        // if (presentSheet.error) return Alert.alert(presentSheet.error.message);
-    
-        // else{
-        //   createUserWithEmailAndPassword(auth,email,password).then((userCredentials) => {
-        //     console.log(userCredentials);
-        //     const user = userCredentials.user;
-        //     console.log(user.email);
-        //   })
+    const subscribe = async () => {
+        // try {
+        //     console.warn("hello");
+        //     const response = await fetch("http://localhost:8080/payment", {
+        //         method: "POST",
+        //         body: JSON.stringify({
+        //             amount: Math.floor(price * 100),
+        //         }),
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //     });
+        //     console.warn("by");
+        //     const data = await response.json();
+        //     console.log(data);
+            
+        //     if (!response.ok) {
+        //         Alert.alert(data.message);
+        //         return;
+        //     }
+            
+        //     const clientSecret = data.clientSecret;
+        //     const initSheet = await stripe.initPaymentSheet({
+        //         paymentIntentClientSecret: clientSecret,
+        //     });
+            
+        //     if (initSheet.error) {
+        //         Alert.alert(initSheet.error.message);
+        //         return;
+        //     }
+            
+        //     const presentSheet = await stripe.presentPaymentSheet({
+        //         clientSecret,
+        //     });
+            
+        //     if (presentSheet.error) {
+        //         Alert.alert(presentSheet.error.message);
+        //         return;
+        //     }
+            
+        //     // Handle successful payment or user creation here
+        // } catch (err) {
+        //     console.warn(err.message);
         // }
-      }
+        console.log("Payment successful")
+    };
+    
     return (
         <>
             <ScrollView style={{ marginTop: 50 }}>
