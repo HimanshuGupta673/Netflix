@@ -2,22 +2,23 @@ import {
     StyleSheet,
     Text,
     View,
-    SafeAreaView,
     Pressable,
     Image,
     FlatList,
 } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase";
 import { useNavigation } from "@react-navigation/native";
 import profiles from "../data/profiles";
-//   import { MovieItems } from "../Context";
+import { useContext } from "react";
+  import { MovieItems } from "../Context";
 const ProfileScreen = () => {
     const navigation = useNavigation();
-    // const {profile,setProfile} = useContext(MovieItems);
-    // console.log("selected profile: ",profile)
+    const {profile,setProfile} = useContext(MovieItems);
+    
     const signOutUser = () => {
         signOut(auth).then(() => {
             navigation.replace("Login");
@@ -54,7 +55,10 @@ const ProfileScreen = () => {
                 <Text style={{ color: "gray", fontSize: 16, fontWeight: "600" }}>Who's Watching?</Text>
 
                 <FlatList numColumns={2} data={profiles} renderItem={({ item }) => (
-                    <Pressable
+                    <Pressable onPress={()=>{
+                        setProfile(item)
+                        navigation.replace("Loading")
+                    }}
                         style={{ marginHorizontal: 10, padding: 20, marginTop: 10 }}>
                         <Image style={{ width: 110, height: 110, borderRadius: 7, resizeMode: "contain" }} source={{ uri: item.image }} />
                         <Text style={{ textAlign: "center", color: "white", fontSize: 15, fontWeight: "500", marginTop: 10 }}>{item.name}</Text>
