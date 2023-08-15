@@ -3,6 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../components/Header'
 import TrendingComponent from '../components/TrendingComponent'
+import MovieRows from '../components/MovieRows'
 
 const HomeScreen = () => {
   return (
@@ -10,6 +11,7 @@ const HomeScreen = () => {
       <ScrollView>
         <Header />
         <TrendingComponent />
+        <MovieRows/>
       </ScrollView>
     </SafeAreaView>
   )

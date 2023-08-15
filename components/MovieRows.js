@@ -6,8 +6,8 @@ const MovieRows = () => {
     const data = movieUrl;
   return (
     <View>
-        {data.map((movie) => (
-            <MovieRow title={movie.name} url={movie.url}/>
+        {data.map((movie,id) => (
+            <MovieRow key={id} title={movie.name} url={movie.url}/>
         ))}
     </View>
   )

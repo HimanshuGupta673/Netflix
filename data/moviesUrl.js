@@ -15,7 +15,7 @@ export default [
     {
         id:"10",
         name:"Hindi Movies",
-        url:`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_original_language=hi&year=2021`
+        url:`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=hi`
     },
     {
         id:"2",
@@ -35,11 +35,11 @@ export default [
     {
         id:"4",
         name:"Romance Movies",
-        url:`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=37`
+        url:`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`
     },
     {
         id:"5",
         name:"Netflix Orginals",
-        url:`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_networks=213`
+        url:`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US`
     }
 ]
