@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import {SafeAreaView  } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../components/Header'
+import TrendingComponent from '../components/TrendingComponent'
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView>
-      <Text>HomeScreen</Text>
-      <Header/>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+      <ScrollView>
+        <Header />
+        <TrendingComponent />
+      </ScrollView>
     </SafeAreaView>
   )
 }
