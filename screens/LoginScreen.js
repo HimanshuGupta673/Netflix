@@ -1,13 +1,31 @@
 import { KeyboardAvoidingView, StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Input } from "react-native-elements";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../Firebase';
 
 const LoginScreen = () => {
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
+
+    useEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((user)=>{
+            if(user){
+                navigation.navigate("Profile");
+            }
+        })
+        return unsubscribe;
+    },[])
+    const signIn = () =>{
+        signInWithEmailAndPassword(auth,input,password).then((userCredentials) =>{
+            console.log(userCredentials)
+            const user = userCredentials.user;
+            console.log("logged in with ",user.email)
+        })
+    }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "black", padding: 10, alignItems: 'center' }}>
             <KeyboardAvoidingView>
@@ -56,7 +74,7 @@ const LoginScreen = () => {
                 </View>
 
                 <Pressable
-                    // onPress={signIn}
+                    onPress={signIn}
                     style={
                         password.length > 4
                             ? 

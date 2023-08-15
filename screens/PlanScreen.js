@@ -10,6 +10,9 @@ import React, { useState } from 'react'
 import { Feather } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { useRoute } from '@react-navigation/native';
+import {auth} from '../Firebase';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 
 import plans from "../data/plans";
 
@@ -17,6 +20,9 @@ const PlanScreen = () => {
     const data = plans
     const [selected, setSelected] = useState([]);
     const [price, setPrice] = useState();
+    const route = useRoute()
+    const email = route.params.email;
+    const password = route.params.password;
 
     const subscribe = async () => {
         // try {
@@ -62,7 +68,15 @@ const PlanScreen = () => {
         // } catch (err) {
         //     console.warn(err.message);
         // }
+
+
         console.log("Payment successful")
+        createUserWithEmailAndPassword(auth,email,password).then((userCredentials) =>{
+            console.log(userCredentials)
+            const user = userCredentials.user;
+            console.log(user.email)
+        })
+        console.log("Registration successful")
     };
     
     return (
